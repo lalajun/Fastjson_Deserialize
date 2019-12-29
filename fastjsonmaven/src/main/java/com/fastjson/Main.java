@@ -11,6 +11,21 @@ public class Main {
         User user1 = new User();
         user1.setName("lala");
         user1.setAge(11);
+        user1.setbytes(new byte[]{'2','d',(byte)0xff,-1,(byte)255,(byte)0x80,(byte) 128,-128});
+
+        //@type序列化
+        String serializedStr1 = JSON.toJSONString(user1,SerializerFeature.WriteClassName);
+        System.out.println("serializedStr1="+serializedStr1);
+
+        //通过parse方法进行反序列化
+        Object obj4 = JSON.parse(serializedStr1);
+        System.out.println("parse反序列化对象名称:"+obj4.getClass().getName());
+        System.out.println("parseObject反序列化:"+obj4);
+
+        //通过这种方式返回的是一个相应的类对象
+        Object obj5 = JSON.parseObject(serializedStr1);
+        System.out.println("parseObject反序列化对象名称:"+obj5.getClass().getName());
+        System.out.println("parseObject反序列化:"+obj5);
 
         //序列化
 //        String serializedStr = JSON.toJSONString(user1);
@@ -31,19 +46,7 @@ public class Main {
 //        System.out.println("parseObject反序列化对象名称:"+obj3.getClass().getName());
 //        System.out.println("parseObject反序列化:"+obj3);
 
-    //@type序列化
-        String serializedStr1 = JSON.toJSONString(user1,SerializerFeature.WriteClassName);
-        System.out.println("serializedStr1="+serializedStr1);
 
-    //通过parse方法进行反序列化
-        Object obj4 = JSON.parse(serializedStr1);
-        System.out.println("parse反序列化对象名称:"+obj4.getClass().getName());
-        System.out.println("parseObject反序列化:"+obj4);
-
-    //通过这种方式返回的是一个相应的类对象
-        Object obj5 = JSON.parseObject(serializedStr1);
-        System.out.println("parseObject反序列化对象名称:"+obj5.getClass().getName());
-        System.out.println("parseObject反序列化:"+obj5);
 
     }
 }

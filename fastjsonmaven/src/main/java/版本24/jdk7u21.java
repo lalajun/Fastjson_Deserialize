@@ -40,7 +40,7 @@ public class jdk7u21 {
                 "\"_name\":\"a\",\"_version\":\"1.0\",\"allowedProtocols\":\"all\"}\n";
         System.out.println(text1);
 
-        Object obj = JSON.parseObject(text1, Object.class, config, Feature.SupportNonPublicField);
+//        Object obj = JSON.parseObject(text1, Object.class, config, Feature.SupportNonPublicField);
         //assertEquals(Model.class, obj.getClass());
     }
     public static void main(String args[]){

